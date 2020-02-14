@@ -719,6 +719,38 @@ NodeGoogleDrive.prototype.writeTextFile = function(
 /**
  * @memberof Deprecated
  * @deprecated: use [create](#create) instead
+ * Shorthand method to create a text file. Kept for retrocompatibility
+ *
+ * @example
+ *  let uploadResponse = await gdriveInstance.writeHtmlFile(
+ *    '<!DOCTYPE html><html><body><p>Hello world!</p></body></html>',
+ *    'ASDFGHZXCCVVFVEVEW',
+ *    'hello_world.html'
+ *  );
+ *
+ *
+ * @param  {string}           content                - The content of the text file
+ * @param  {string}           [parentFolder]         - The parent folder on which to write. Defaults to the ROOT_FOLDER
+ *                                                   passed in the constructor options
+ * @param  {string}           [destinationFilename]  - The destination filename
+ * @return {Promise<Object>}  the response from google drive
+ */
+NodeGoogleDrive.prototype.writeHtmlFile = function(
+  content,
+  parentFolder,
+  destinationFilename
+) {
+  return this.create({
+    source: content,
+    parentFolder,
+    destinationFilename: destinationFilename || 'Html_file_' + Date.now(),
+    mimeType: 'text/html'
+  });
+};
+
+/**
+ * @memberof Deprecated
+ * @deprecated: use [create](#create) instead
  * Just an example method to show how to upload a PDF
  *
  * @param  {string}           sourcefile             - The source file from which to read the content of the PDF File to
